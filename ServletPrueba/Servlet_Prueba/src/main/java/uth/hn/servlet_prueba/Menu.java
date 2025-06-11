@@ -33,7 +33,7 @@ public class Menu extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<div class= 'menu'>");
-        out.println("<a href='MiServlet?nombre=Josue'>Servlet Josue</a>");
+        out.println("<a href='MiServlet?nombre=Josue Ramirez'>Servlet Josue Ramirez</a>");
         out.println("<a href='MiServlet?nombre=Walter'>Servlet Walter</a>");
         out.println("<a href='MiServlet?nombre=Yessica'>Servlet Yessica</a>");
         out.println("</div>");
