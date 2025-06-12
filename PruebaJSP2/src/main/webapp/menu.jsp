@@ -1,3 +1,4 @@
+
 <html>
 <head>
     <title>Title</title>
@@ -22,15 +23,17 @@
         transition: background 0.3s
     }
 
-    .menu a:hoover {
+    .menu a:hover {
         background-color: #575757
     }</style>
+
+
 </head>
 <body>
 <div class="menu">
     <a href='pagina2.jsp'>Pagina 2</a>
     <a href='index.jsp'>Inicio</a>
-    <a href='www.google.com' target=_blank>Externo</a>
+    <a href='www.google.com' target="_blank">Externos</a>
 </div>
 </body>
 </html>

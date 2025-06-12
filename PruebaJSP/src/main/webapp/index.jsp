@@ -3,52 +3,41 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<%@include file="menu.jsp"%>
-<h1>Prueba de JSP</h1>
+<%
+    String error = null;
+    if("POST".equalsIgnoreCase(request.getMethod())){
+        String usuario = request.getParameter("username");
+        String clave = request.getParameter("pwd");
 
-<br>
-<form method="post">
-    Numero 1: <input type="text" name="num1" id="num1">
-    Numero 2: <input type="text" name="num2" id="num2">
-    <input type="submit" value="Sumar">
+        if("admin".equals(usuario) && "12345".equals(clave)){
+            session.setAttribute("acceso", usuario);
+            response.sendRedirect("pagina2.jsp");
+            return;
+        }else{
+            session.invalidate();
+            error = "Usuario o contraseña incorrecto";
+        }
+    }
+
+    if(error != null){ %>
+        <br/><p class="error"><%= error %></p><br/>
+<% } %>
+
+<form method="post" action="index.jsp">
+    <h3>Inicio de Sesión</h3>
+    <div class="form-group">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="pwd">Contraseña:</label>
+        <input type="password" id="pwd" name="pwd" required>
+    </div>
+    <input type="submit" value="Ingresar" />
 </form>
 
-<%! int resultado = 0;
-    String mensaje = null;
-%>
-
-<%
-    try{
-        mensaje = null;
-        if(request.getParameter("num1") != null && request.getParameter("num2") !=null){
-            int numero1 = Integer.parseInt(request.getParameter("num1"));
-            int numero2 = Integer.parseInt(request.getParameter("num2"));
-
-            resultado = numero1 + numero2;
-        }
-    }catch (Exception e){
-            //response.getWriter().println("<p>Favor ingrese unicamente numeros en los campos</p>");
-
-            mensaje = "Favor ingrese unicamente numeros en los campos";
-            //<h4>Por favor ingrese solamente numeros.</h4>
-            resultado = 0;
-    }
-
-
-    if(mensaje == null){
-%>
-    <h3>Resultado: <%= resultado%></h3>
-<%
-    }
-%>
-
-<h4><%= mensaje == null? "": mensaje %></h4>
-
-
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
 </body>
 </html>
